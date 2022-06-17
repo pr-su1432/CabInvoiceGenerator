@@ -38,9 +38,9 @@ namespace CabInvoiceGeneratorTesting
         {
             InvoiceGenerator fare = new InvoiceGenerator();
             Ride[] ride = { new Ride(20, 20), new Ride(10, 5), new Ride(30, 30) };
-            double totalFate = 655, numberOfRides = ride.Length, averageFare = totalFate / numberOfRides;
+            double totalFare = 655, numberOfRides = ride.Length, averageFare = totalFare / numberOfRides;
             EnhanceInvoice result = fare.MultipleRides(ride);
-            Assert.AreEqual(totalFate, result.totalFare);
+            Assert.AreEqual(totalFare, result.totalFare);
             Assert.AreEqual(averageFare, result.averageFare);
             Assert.AreEqual(numberOfRides, result.numberOfRides);
 
