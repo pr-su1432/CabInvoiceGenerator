@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CabInvoiceGenerator
 {
-    public class InvoiceGeneratorExceptions :Exception
+    public class InvoiceGeneratorExceptions : Exception
     {
        
         
