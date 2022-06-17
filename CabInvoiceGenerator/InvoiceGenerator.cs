@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CabInvoiceGenerator
 {
-    internal class InvoiceGenerator
+    public class InvoiceGenerator
     {
         private readonly int COST_PER_MINUTE = 1;
         private readonly double MINIMUM_FARE = 5;
