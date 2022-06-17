@@ -14,9 +14,14 @@ namespace CabInvoiceGenerator
              double fare = example.CalculateFare();
              Console.WriteLine("Fare: " + fare);*/
 
-            Ride[] ride = { new Ride(20, 20), new Ride(20, 5) };
+            /* Ride[] ride = { new Ride(20, 20), new Ride(20, 5) };
+             InvoiceGenerator name = new InvoiceGenerator();
+             double fare = name.MultipleRides(ride);*/
+
             InvoiceGenerator name = new InvoiceGenerator();
-            double fare = name.MultipleRides(ride);
+            Ride[] ride = { new Ride(20, 20), new Ride(10, 5), new Ride(30, 30) };
+            EnhanceInvoice invoice = name.MultipleRides(ride);
+            Console.WriteLine("TotalFare: " + invoice.totalFare + "\nNumberOfRides: " + invoice.numberOfRides + "\nAverage Fare: " + invoice.averageFare);
         }
     }
 }
