@@ -8,47 +8,48 @@ namespace CabInvoiceGenerator
 {
     public class RideRepository
     {
-      
-        
-            Dictionary<string, List<Ride>> user;
-            public RideRepository()
+
+
+        Dictionary<string, List<Ride>> user;
+        public RideRepository()
+        {
+            this.user = new Dictionary<string, List<Ride>>();
+        }
+        public void AddRides(string userid, Ride[] rides)
+        {
+            bool result = this.user.ContainsKey(userid);
+            try
             {
-                this.user = new Dictionary<string, List<Ride>>();
-            }
-            public void AddRides(string userid, Ride[] rides)
-            {
-                bool result = this.user.ContainsKey(userid);
-                try
+                if (!result)
                 {
-                    if (!result)
-                    {
-                        List<Ride> list = new List<Ride>();
-                        list.AddRange(rides);
-                        user.Add(userid, list);
-                    }
-                }
-                catch (InvoiceGeneratorExceptions)
-                {
-                    throw new InvoiceGeneratorExceptions(InvoiceGeneratorExceptions.ExceptionType.NULL_RIDES, "Rides Are Null");
+                    List<Ride> list = new List<Ride>();
+                    list.AddRange(rides);
+                    user.Add(userid, list);
                 }
             }
-            public Ride[] GetRides(string userid)
+            catch (InvoiceGeneratorExceptions)
             {
-                try
-                {
-                    return this.user[userid].ToArray();
-                }
-                catch (Exception)
-                {
-                    throw new InvoiceGeneratorExceptions(InvoiceGeneratorExceptions.ExceptionType.INVALID_USER_ID, "Invalid UserID");
-                }
+                throw new InvoiceGeneratorExceptions(InvoiceGeneratorExceptions.ExceptionType.NULL_RIDES, "Rides Are Null");
             }
-            public EnhanceInvoice UserInvoice(string userid)
+        }
+        public Ride[] GetRides(string userid)
+        {
+            try
             {
-                InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
-                Console.WriteLine("UserID: " + userid);
-                return invoiceGenerator.MultipleRides(GetRides(userid));
+                return this.user[userid].ToArray();
             }
-        
+            catch (Exception)
+            {
+                throw new InvoiceGeneratorExceptions(InvoiceGeneratorExceptions.ExceptionType.INVALID_USER_ID, "Invalid UserID");
+            }
+        }
+        public EnhanceInvoice UserInvoice(string userid)
+        {
+            InvoiceGenerator invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
+            Console.WriteLine("UserID: " + userid);
+            return invoiceGenerator.MultipleRides(GetRides(userid));
+        }
     }
+
 }
+
